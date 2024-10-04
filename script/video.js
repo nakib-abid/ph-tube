@@ -9,8 +9,16 @@ const loadCatagories = () => {
     .catch((error) => console.log(error));
 };
 
-const displayCatagories = (data) => {
-    console.log(data)
+const displayCatagories = (catagories) => {
+    const categoryContainer = document.getElementById('categories');
+    catagories.forEach(item => {
+        // create a button
+        console.log(item)
+        const button = document.createElement('button');
+        button.classList = "btn";
+        button.innerText = item.category;
+        categoryContainer.append(button);
+    });
 };
 
 

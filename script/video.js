@@ -1,3 +1,11 @@
+function getTimeString(time){
+    const hour = parseInt(time/3600);
+    let remainingSecond = time%3600;
+    const minute = parseInt(remainingSecond/60);
+    remainingSecond = remainingSecond % 60;
+    return `${hour} hour ${minute} minute ${remainingSecond} second ago`;
+}
+
 // fetch, load and show catagories on html
 //  create load catagories function
 //  create display catagories function
@@ -22,11 +30,14 @@ const displayVideos = (videos) => {
     const card = document.createElement("div");
     card.classList = "card card-compact";
     card.innerHTML = `
-         <figure class = "h-[200px]">
+         <figure class = "h-[200px] relative">
     <img
       src=${video.thumbnail}
       class = "h-full w-full object-cover"
       alt="Shoes" />
+      ${
+        video.others.posted_date?.length === 0 ? "" : ` <span class="absolute right-2 bottom-2 bg-black rounded p-1 text-white">${getTimeString(video.others.posted_date)}<span/>`
+      }
   </figure>
   <div class="px-o py-2 flex gap-2">
     <div>
@@ -36,7 +47,7 @@ const displayVideos = (videos) => {
      <h2 class="font-bold">${video.title}</h2>
      <div class="flex gap-2 items-center">
       <p class="text-gray-400">${video.authors[0].profile_name}</p>
-      <img class="w-5 h-5" src="https://img.icons8.com/?size=48&id=D9RtvkuOe31p&format=png" />
+      ${video.authors[0].verified === true ? `<img class="w-5 h-5" src="https://img.icons8.com/?size=48&id=D9RtvkuOe31p&format=png" />` : ''}
      <div/>
      
      <p></p>
